@@ -1,26 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/data/datasources/weather_api.dart';
-import 'package:weather_app/data/repositories/weather_repository_impl.dart';
-import 'package:weather_app/data/repositories/weather_respository.dart';
-import 'package:weather_app/domain/usecases/get_weather_usecase.dart';
 import 'package:weather_app/presentation/providers/weather_provider.dart';
 import 'package:weather_app/presentation/screens/weather_screen.dart';
-import 'package:weather_app/utils/constants/constants.dart'; // Add get_it package
 
-final sl = GetIt.instance;
-
-void setupLocator() {
-  sl.registerLazySingleton<WeatherApi>(() => WeatherApi(sl<Dio>()));
-  sl.registerLazySingleton<WeatherRepository>(
-    () => WeatherRepositoryImpl(defaultApiKey),
-  );
-  sl.registerLazySingleton<GetWeatherUseCase>(
-    () => GetWeatherUseCase(sl<WeatherRepository>()),
-  );
-}
+import 'domain/usecases/get_weather_usecase.dart';
+import 'injection_container.dart';
 
 void main() {
   setupLocator();
@@ -40,11 +24,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        home: const WeatherScreen(
-          lat: 11.530020473583622,
-          lon: 104.8471329839505,
-          // 11.530020473583622, 104.8471329839505
-        ), // Example coords
+        debugShowCheckedModeBanner: false,
+        title: 'Weather App',
+        theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Aptos'),
+        home: WeatherScreen(),
       ),
     );
   }

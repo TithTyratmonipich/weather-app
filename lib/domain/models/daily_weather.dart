@@ -13,12 +13,17 @@ class DailyWeather {
   final double? moonPhase;
   final String? summary;
   final Temp? temp;
+  @JsonKey(name: "feels_like")
   final FeelsLike? feelsLike;
   final int? pressure;
   final int? humidity;
+  @JsonKey(name: "dew_point")
   final double? dewPoint;
+  @JsonKey(name: "wind_speed")
   final double? windSpeed;
+  @JsonKey(name: "wind_deg")
   final int? windDeg;
+  @JsonKey(name: "wind_gust")
   final double? windGust;
   final List<WeatherData>? weather;
   final int? clouds;

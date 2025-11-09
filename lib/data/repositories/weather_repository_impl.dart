@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:weather_app/data/core/network/dio_client.dart';
-import 'package:weather_app/data/datasources/weather_api.dart';
-import 'package:weather_app/data/repositories/weather_respository.dart';
+import 'package:weather_app/core/network/dio_client.dart';
+import 'package:weather_app/data/datasources/network/weather_api.dart';
 import 'package:weather_app/domain/exceptions/api_exception.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
+import 'package:weather_app/domain/repositories/weather_respository.dart';
 
 class WeatherRepositoryImpl extends WeatherRepository {
   late final WeatherApi _api;

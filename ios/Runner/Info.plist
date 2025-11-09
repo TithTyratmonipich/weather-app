@@ -28,6 +28,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+    <dict>
+    	<key>TemporaryPreciseAccuracy</key>
+    	<string>The Weather App requires temporary access to the device's precise location.</string>
+    </dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The Weather App requires access to the device's location.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -45,5 +52,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
 </dict>
 </plist>

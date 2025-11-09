@@ -1,5 +1,5 @@
-import 'package:weather_app/data/repositories/weather_respository.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
+import 'package:weather_app/domain/repositories/weather_respository.dart';
 
 class GetWeatherUseCase {
   final WeatherRepository repository;
