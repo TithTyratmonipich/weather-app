@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'weather_data.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class WeatherData {
   final int? id;
   final String? main;

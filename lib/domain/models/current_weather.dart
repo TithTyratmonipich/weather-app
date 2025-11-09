@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_app/domain/models/rain_model.dart';
 import 'package:weather_app/domain/models/weather_data.dart';
 
 part 'current_weather.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class CurrentWeather {
   final int? dt;
   final int? sunrise;
@@ -26,6 +27,7 @@ class CurrentWeather {
   final double? windGust;
   final List<WeatherData>? weather;
   final double? pop;
+  final Rain? rain;
 
   CurrentWeather({
     this.dt,
@@ -44,6 +46,7 @@ class CurrentWeather {
     this.windGust,
     this.weather,
     this.pop,
+    this.rain,
   });
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) =>

@@ -4,7 +4,7 @@ extension UnixTimestamp on int {
   // -------------------------------------------------
   // 1. Hourly – only hour + am/pm (same day)
   // -------------------------------------------------
-  String toHourAmPm([String pattern = 'h a']) {
+  String toHourAmPm([String pattern = 'hh:mm a']) {
     final DateTime utc = DateTime.fromMillisecondsSinceEpoch(
       this * 1000,
       isUtc: true,

@@ -12,11 +12,3 @@ WeatherData _$WeatherDataFromJson(Map<String, dynamic> json) => WeatherData(
   description: json['description'] as String?,
   icon: json['icon'] as String?,
 );
-
-Map<String, dynamic> _$WeatherDataToJson(WeatherData instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'main': instance.main,
-      'description': instance.description,
-      'icon': instance.icon,
-    };

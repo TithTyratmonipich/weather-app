@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/core/services/notification_service.dart';
 import 'package:weather_app/presentation/providers/weather_provider.dart';
 import 'package:weather_app/presentation/screens/weather_screen.dart';
 
@@ -7,7 +8,9 @@ import 'domain/usecases/get_weather_usecase.dart';
 import 'injection_container.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  NotificationService().init();
   runApp(const MyApp());
 }
 

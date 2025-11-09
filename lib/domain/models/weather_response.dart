@@ -4,7 +4,7 @@ import 'package:weather_app/domain/models/daily_weather.dart';
 
 part 'weather_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class WeatherResponse {
   final double lat;
   final double lon;

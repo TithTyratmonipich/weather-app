@@ -35,43 +35,12 @@ DailyWeather _$DailyWeatherFromJson(Map<String, dynamic> json) => DailyWeather(
   uvi: (json['uvi'] as num?)?.toDouble(),
 );
 
-Map<String, dynamic> _$DailyWeatherToJson(DailyWeather instance) =>
-    <String, dynamic>{
-      'dt': instance.dt,
-      'sunrise': instance.sunrise,
-      'sunset': instance.sunset,
-      'moonrise': instance.moonrise,
-      'moonset': instance.moonset,
-      'moonPhase': instance.moonPhase,
-      'summary': instance.summary,
-      'temp': instance.temp,
-      'feels_like': instance.feelsLike,
-      'pressure': instance.pressure,
-      'humidity': instance.humidity,
-      'dew_point': instance.dewPoint,
-      'wind_speed': instance.windSpeed,
-      'wind_deg': instance.windDeg,
-      'wind_gust': instance.windGust,
-      'weather': instance.weather,
-      'clouds': instance.clouds,
-      'pop': instance.pop,
-      'rain': instance.rain,
-      'uvi': instance.uvi,
-    };
-
 FeelsLike _$FeelsLikeFromJson(Map<String, dynamic> json) => FeelsLike(
   day: (json['day'] as num?)?.toDouble(),
   night: (json['night'] as num?)?.toDouble(),
   eve: (json['eve'] as num?)?.toDouble(),
   morn: (json['morn'] as num?)?.toDouble(),
 );
-
-Map<String, dynamic> _$FeelsLikeToJson(FeelsLike instance) => <String, dynamic>{
-  'day': instance.day,
-  'night': instance.night,
-  'eve': instance.eve,
-  'morn': instance.morn,
-};
 
 Temp _$TempFromJson(Map<String, dynamic> json) => Temp(
   day: (json['day'] as num?)?.toDouble(),
@@ -81,12 +50,3 @@ Temp _$TempFromJson(Map<String, dynamic> json) => Temp(
   eve: (json['eve'] as num?)?.toDouble(),
   morn: (json['morn'] as num?)?.toDouble(),
 );
-
-Map<String, dynamic> _$TempToJson(Temp instance) => <String, dynamic>{
-  'day': instance.day,
-  'min': instance.min,
-  'max': instance.max,
-  'night': instance.night,
-  'eve': instance.eve,
-  'morn': instance.morn,
-};

@@ -7,14 +7,13 @@ Dio createDio() {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://api.openweathermap.org/data/3.0/',
-      // Matches your Retrofit baseUrl
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 15),
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
       headers: {'Content-Type': 'application/json'}, // If needed
     ),
   );
 
-  // Add interceptors for logging/errors (optional but recommended)
+  // Add interceptors for logging/errors
   dio.interceptors.add(
     PrettyDioLogger(
       requestBody: true,

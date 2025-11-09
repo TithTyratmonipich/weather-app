@@ -26,24 +26,7 @@ CurrentWeather _$CurrentWeatherFromJson(Map<String, dynamic> json) =>
           ?.map((e) => WeatherData.fromJson(e as Map<String, dynamic>))
           .toList(),
       pop: (json['pop'] as num?)?.toDouble(),
+      rain: json['rain'] == null
+          ? null
+          : Rain.fromJson(json['rain'] as Map<String, dynamic>),
     );
-
-Map<String, dynamic> _$CurrentWeatherToJson(CurrentWeather instance) =>
-    <String, dynamic>{
-      'dt': instance.dt,
-      'sunrise': instance.sunrise,
-      'sunset': instance.sunset,
-      'temp': instance.temp,
-      'feels_like': instance.feelsLike,
-      'pressure': instance.pressure,
-      'humidity': instance.humidity,
-      'dew_point': instance.dewPoint,
-      'uvi': instance.uvi,
-      'clouds': instance.clouds,
-      'visibility': instance.visibility,
-      'wind_speed': instance.windSpeed,
-      'wind_deg': instance.windDeg,
-      'wind_gust': instance.windGust,
-      'weather': instance.weather,
-      'pop': instance.pop,
-    };

@@ -3,7 +3,7 @@ import 'package:weather_app/domain/models/weather_data.dart';
 
 part 'daily_weather.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class DailyWeather {
   final int? dt;
   final int? sunrise;
@@ -58,7 +58,7 @@ class DailyWeather {
       _$DailyWeatherFromJson(json);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class FeelsLike {
   final double? day;
   final double? night;
@@ -71,7 +71,7 @@ class FeelsLike {
       _$FeelsLikeFromJson(json);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Temp {
   final double? day;
   final double? min;

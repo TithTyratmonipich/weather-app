@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/domain/exceptions/api_exception.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
+import 'package:weather_app/domain/usecases/check_weather_alerts.dart';
 import '../../domain/usecases/get_weather_usecase.dart';
 
 class WeatherProvider with ChangeNotifier {
@@ -30,6 +32,11 @@ class WeatherProvider with ChangeNotifier {
 
     try {
       _weather = await _useCase.execute(lat, lon);
+      if (_weather != null) {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('localTimeZone', _weather!.timezone);
+        await checkAndScheduleAlerts(_weather!);
+      }
     } catch (e) {
       if (e is ApiException) {
         _error = 'Error ${e.code}: ${e.message}';

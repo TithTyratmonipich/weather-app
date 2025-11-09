@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/domain/models/current_weather.dart';
 import 'package:weather_app/domain/models/daily_weather.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
+import 'package:weather_app/presentation/screens/settings_screen.dart'
+    show SettingsScreen;
 import 'package:weather_app/utils/date_utils.dart';
 import 'package:weather_app/utils/icon_utils.dart';
+import 'package:weather_app/utils/string_utils.dart';
 
 class BodyWeatherWidget extends StatelessWidget {
   final WeatherResponse weather;
@@ -30,21 +33,45 @@ class BodyWeatherWidget extends StatelessWidget {
               children: [
                 // Header
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       children: [
                         Icon(Icons.location_on, color: Colors.white, size: 24),
                         SizedBox(width: 8),
-                        Text(
-                          weather.timezone.split("/").last.replaceAll("_", " "),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              weather.timezone
+                                  .split("/")
+                                  .last
+                                  .replaceAll("_", " "),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "(${weather.current?.dt?.toHourAmPm() ?? ""})",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
+                    ),
+                    Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.settings, color: Colors.white, size: 28),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => SettingsScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -69,7 +96,9 @@ class BodyWeatherWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${weather.current?.weather?.first.main}',
+                        toTitleCase(
+                          weather.current?.weather?.first.description ?? "",
+                        ),
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
                           fontSize: 24,
@@ -123,7 +152,7 @@ class BodyWeatherWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 SizedBox(
-                  height: 130,
+                  height: 150,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: weather.hourly?.length ?? 0,
@@ -162,7 +191,6 @@ class BodyWeatherWidget extends StatelessWidget {
                     },
                   ),
                 ),
-                // ...weeklyForecast.map((day) => _buildDailyCard(day)).toList(),
                 SizedBox(height: 20),
               ],
             ),
@@ -224,6 +252,13 @@ class BodyWeatherWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          Text(
+            "${currentWeather.weather?.first.main}",
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.8),
+              fontSize: 14,
+            ),
+          ),
         ],
       ),
     );
@@ -259,26 +294,35 @@ class BodyWeatherWidget extends StatelessWidget {
             color: Colors.white,
             size: 28,
           ),
-          SizedBox(width: 20),
+          SizedBox(width: 10),
+          Text(
+            "${weather.weather!.first.main}°",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(width: 10),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  "${weather.temp?.max?.round()}°",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "${weather.temp?.min?.round()}°",
+                  "min: ${weather.temp?.min?.round()}°",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.6),
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "max: ${weather.temp?.max?.round()}°",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],

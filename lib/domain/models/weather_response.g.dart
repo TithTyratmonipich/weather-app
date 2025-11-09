@@ -21,13 +21,3 @@ WeatherResponse _$WeatherResponseFromJson(Map<String, dynamic> json) =>
           ?.map((e) => DailyWeather.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
-
-Map<String, dynamic> _$WeatherResponseToJson(WeatherResponse instance) =>
-    <String, dynamic>{
-      'lat': instance.lat,
-      'lon': instance.lon,
-      'timezone': instance.timezone,
-      'current': instance.current,
-      'hourly': instance.hourly,
-      'daily': instance.daily,
-    };

@@ -5,6 +5,8 @@ import 'package:weather_app/domain/exceptions/location_exceptions.dart';
 import 'package:weather_app/domain/usecases/get_location_usecase.dart';
 import 'package:weather_app/injection_container.dart';
 import 'package:weather_app/presentation/widgets/body_weather_widget.dart';
+import 'package:weather_app/presentation/widgets/weather_loading_widget.dart';
+import 'package:weather_app/presentation/widgets/weather_error_widget.dart';
 import '../providers/weather_provider.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -71,8 +73,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
         if (shouldOpen == true) {
           await Geolocator.openAppSettings(); // Open settings
-          // After returning from settings, optionally re-check permissions
-          _getLocationAndFetch(); // Retry automatically for convenience
+          _getLocationAndFetch();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Using default location instead.')),
@@ -84,6 +85,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(e.message)));
+        await Geolocator.openLocationSettings(); // Open settings
       }
     } catch (e) {
       if (mounted) {
@@ -97,26 +99,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Weather App')),
       body: Consumer<WeatherProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (provider.error != null) {
-            return Center(child: Text(provider.error!));
+            return const WeatherLoadingWidget();
           } else if (_permissionDenied) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('You have not allowed location access.'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: _getLocationAndFetch, // Retry re-requests
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
+            return WeatherErrorWidget(
+              title: 'You have not allowed location access.',
+              onRetry: _getLocationAndFetch,
             );
           } else if (provider.weather != null) {
             final weather = provider.weather!;
@@ -129,18 +119,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
               ),
             );
           } else if (provider.error != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(provider.error!),
-                ),
-              );
-            });
-            return Center(child: Text(provider.error!));
+            return WeatherErrorWidget(
+              title: 'Error on ${provider.error!}',
+              onRetry: _getLocationAndFetch,
+            );
           } else {
-            // Initial state: Trigger fetch
-            return const Center(child: Text('Loading weather...'));
+            return const WeatherLoadingWidget();
           }
         },
       ),
