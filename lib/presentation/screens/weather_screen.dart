@@ -46,7 +46,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         ).showSnackBar(SnackBar(content: Text(e.message)));
       }
       useCase.repository.getDefaultPosition();
-    } on AppLocationPermissionDeniedForeverException catch (e) {
+    } on AppLocationPermissionDeniedForeverException {
       setState(() => _permissionDenied = true);
       if (mounted) {
         // Show prompt dialog before opening settings
@@ -75,9 +75,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
           await Geolocator.openAppSettings(); // Open settings
           _getLocationAndFetch();
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Using default location instead.')),
-          );
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Using default location instead.')),
+            );
+          }
         }
       }
     } on AppLocationServiceDisabledException catch (e) {

@@ -102,7 +102,7 @@ class BodyWeatherWidget extends StatelessWidget {
                         ),
                         key: ValueKey("currentWeather"),
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                           fontSize: 24,
                           fontWeight: FontWeight.w400,
                         ),
@@ -116,9 +116,11 @@ class BodyWeatherWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.3),
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -217,7 +219,10 @@ class BodyWeatherWidget extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 14),
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.8),
+            fontSize: 14,
+          ),
         ),
       ],
     );
@@ -228,9 +233,9 @@ class BodyWeatherWidget extends StatelessWidget {
       margin: EdgeInsets.only(right: 15),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white.withOpacity(0.3)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -257,7 +262,7 @@ class BodyWeatherWidget extends StatelessWidget {
           Text(
             "${currentWeather.weather?.first.main}",
             style: TextStyle(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
               fontSize: 14,
             ),
           ),
@@ -271,9 +276,9 @@ class BodyWeatherWidget extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 15),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white.withOpacity(0.3)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -313,7 +318,7 @@ class BodyWeatherWidget extends StatelessWidget {
                 Text(
                   "min: ${weather.temp?.min?.round()}°",
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.6),
+                    color: Colors.white.withValues(alpha: 0.6),
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),

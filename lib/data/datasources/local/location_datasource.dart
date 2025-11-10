@@ -38,7 +38,10 @@ class LocationDataSource {
     }
 
     return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,  // Or low/medium/best as needed
+        distanceFilter: 10,  // Optional: min distance for updates
+      ),
     );
   }
 
