@@ -28,6 +28,8 @@ jobs:
         run: flutter pub get
       - name: Analyze code
         run: flutter analyze
+      - name: Generate mocks
+        run: flutter pub run build_runner build --delete-conflicting-outputs
       - name: Run unit tests
         run: flutter test --machine > test-results.json
       - name: Run integration tests
@@ -36,8 +38,6 @@ jobs:
         run: flutter build apk --release
       - name: Build iOS (if targeting iOS)
         run: flutter build ios --release
-        if: runner.os == 'macOS'  # iOS build requires macOS runner
-      # Optional: Upload artifacts (e.g., APK for manual testing)
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
