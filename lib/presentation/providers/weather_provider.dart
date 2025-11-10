@@ -58,4 +58,9 @@ class WeatherProvider with ChangeNotifier {
       return e.toString();
     }
   }
+
+  void resetValue() {
+    _weather = null;
+    _isLoading = false;
+  }
 }

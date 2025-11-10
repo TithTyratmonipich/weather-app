@@ -67,7 +67,7 @@ class NotificationService {
     final String localTimeZone = await AwesomeNotifications()
         .getLocalTimeZoneIdentifier();
 
-    // final dateNow = DateTime.now().add(Duration(seconds: 10));
+    final dateNow = DateTime.now().add(Duration(seconds: 10));
     log('Scheduling alert at $scheduledDate in timezone $localTimeZone');
 
     await AwesomeNotifications().createNotification(
@@ -79,7 +79,8 @@ class NotificationService {
         payload: {'data': payload}, // For handling taps
       ),
       schedule: NotificationCalendar.fromDate(
-        date: scheduledDate,
+        date: dateNow,
+        // date: scheduledDate,
         // timeZone: localTimeZone,
         allowWhileIdle: true,
         preciseAlarm: true, // For exact timing (requires permission)

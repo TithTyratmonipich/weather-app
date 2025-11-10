@@ -5,8 +5,14 @@ import 'package:weather_app/core/services/notification_service.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
 import 'package:weather_app/utils/date_utils.dart';
 
-Future<void> checkAndScheduleAlerts(WeatherResponse weather) async {
-  final prefs = await SharedPreferences.getInstance();
+Future<void> checkAndScheduleAlerts(
+  WeatherResponse weather, {
+  SharedPreferences? prefs,
+  NotificationService? notificationService,
+}) async {
+  prefs ??= await SharedPreferences.getInstance();
+  notificationService ??= NotificationService();
+
   final bool rainAlert = prefs.getBool('rainAlert') ?? false;
   final bool windAlert = prefs.getBool('windAlert') ?? false;
   log("checkAndScheduleAlerts, rainAlert: $rainAlert, windAlert, $windAlert");
@@ -31,12 +37,9 @@ Future<void> checkAndScheduleAlerts(WeatherResponse weather) async {
               forecast.weather!.first.description!.contains('rain') ||
               (forecast.rain!.the1H ?? 0) > 0;
 
-          log("isRainConfirmed: $isRainConfirmed");
           if (isRainConfirmed) {
             final alertTime = forecastTime.subtract(Duration(hours: 1));
-            log(
-              "alertTime.isAfter(DateTime.now()): ${alertTime.isAfter(DateTime.now())}",
-            );
+
             if (alertTime.isAfter(DateTime.now())) {
               await NotificationService().scheduleAlert(
                 1,

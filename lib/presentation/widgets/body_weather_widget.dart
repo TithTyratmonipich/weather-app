@@ -89,6 +89,7 @@ class BodyWeatherWidget extends StatelessWidget {
                       SizedBox(height: 20),
                       Text(
                         '${weather.current?.temp?.round() ?? 'N/A'}°',
+                        key: ValueKey("currentTemp"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 80,
@@ -99,6 +100,7 @@ class BodyWeatherWidget extends StatelessWidget {
                         toTitleCase(
                           weather.current?.weather?.first.description ?? "",
                         ),
+                        key: ValueKey("currentWeather"),
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
                           fontSize: 24,
