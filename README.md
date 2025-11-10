@@ -31,6 +31,6 @@ A Flutter app for displaying current weather, hourly/daily forecasts, and user-s
 - Workflow in `.github/workflows/flutter_ci.yaml`: Runs on push/PR—analyze, tests, build APK/iOS.
 
 ### Video Demo
-`https://youtu.be/-pdbqebPOaI` - Shows app launch, location fetch, weather display, alert setup, and notification trigger (via time advance).
+(https://youtu.be/-pdbqebPOaI) - Shows app launch, location fetch, weather display, alert setup, and notification trigger (via time advance).
 
 Built by TITH Tyratmonipich.
