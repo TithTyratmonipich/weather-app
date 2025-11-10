@@ -79,8 +79,8 @@ class NotificationService {
         payload: {'data': payload}, // For handling taps
       ),
       schedule: NotificationCalendar.fromDate(
-        date: dateNow,
         // date: scheduledDate,
+        date: scheduledDate,
         // timeZone: localTimeZone,
         allowWhileIdle: true,
         preciseAlarm: true, // For exact timing (requires permission)

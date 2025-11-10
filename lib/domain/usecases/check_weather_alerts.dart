@@ -24,9 +24,7 @@ Future<void> checkAndScheduleAlerts(
     for (var forecast in weather.hourly!) {
       if (forecast.pop != null) {
         final double rainProb = forecast.pop! * 100; // Convert to percentage
-        final forecastTime = DateTime.parse(
-          forecast.dt!.toUtcPlus7String("yyyy-MM-dd HH:mm:ss"),
-        );
+
         if (rainAlert &&
             rainProb > rainThreshold &&
             forecast.weather != null &&
@@ -38,6 +36,9 @@ Future<void> checkAndScheduleAlerts(
               (forecast.rain!.the1H ?? 0) > 0;
 
           if (isRainConfirmed) {
+            final forecastTime = DateTime.fromMillisecondsSinceEpoch(
+              forecast.dt! * 1000,
+            ); // Calculate from dt
             final alertTime = forecastTime.subtract(Duration(hours: 1));
 
             if (alertTime.isAfter(DateTime.now())) {
@@ -55,6 +56,9 @@ Future<void> checkAndScheduleAlerts(
         if (windAlert &&
             forecast.windSpeed != null &&
             forecast.windSpeed! > windThreshold) {
+          final forecastTime = DateTime.fromMillisecondsSinceEpoch(
+            forecast.dt! * 1000,
+          ); // Calculate from dt
           final alertTime = forecastTime.subtract(Duration(hours: 1));
           if (alertTime.isAfter(DateTime.now())) {
             await NotificationService().scheduleAlert(
