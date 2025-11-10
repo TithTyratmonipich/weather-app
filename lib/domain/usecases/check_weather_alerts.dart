@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/core/services/notification_service.dart';
 import 'package:weather_app/domain/models/weather_response.dart';
-import 'package:weather_app/utils/date_utils.dart';
 
 Future<void> checkAndScheduleAlerts(
   WeatherResponse weather, {
